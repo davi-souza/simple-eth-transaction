@@ -51,8 +51,6 @@ const SendTransactionForm: FC<{
                 setState(
                   assoc('successMsg', `You've successfully sent ${amount} ETH`),
                 );
-                setState(assoc('toAddress', ''));
-                setState(assoc('amount', ''));
               }
             } catch (error) {
               console.error(error);
@@ -63,6 +61,8 @@ const SendTransactionForm: FC<{
                 ),
               );
             }
+            setState(assoc('toAddress', ''));
+            setState(assoc('amount', ''));
             setState(assoc('loading', false));
           }
         }}
