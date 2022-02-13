@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "NODE_OPTIONS='--http-server-default-timeout=0' next start",
+    "start": "next start",
     "lint": "next lint",
     "format": "prettier --write ."
   },

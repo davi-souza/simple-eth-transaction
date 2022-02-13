@@ -1,7 +1,6 @@
 import { ChangeEvent, FC, useCallback, useEffect, useState } from 'react';
 import { ErrorMsg, InfoMsg, SimpleForm, SuccessMsg } from '../../styles';
 import { Div, FormTitle } from '../../styles/sendTransactionFormComponent';
-import { renderCurrency } from '../../utils/currencies';
 import { assoc } from '../../utils/objects';
 
 const SendTransactionForm: FC<{
@@ -11,6 +10,7 @@ const SendTransactionForm: FC<{
     toAddress: '',
     amount: '',
     loading: false,
+    infoMsg: '',
     successMsg: '',
     errorMsg: '',
   });
@@ -26,6 +26,7 @@ const SendTransactionForm: FC<{
         currentTarget: { name, value },
       } = e;
       if (name === 'toAddress' || name === 'amount') {
+        setState(assoc('infoMsg', ''));
         setState(assoc('errorMsg', ''));
         setState(assoc(name, value));
       }
@@ -42,14 +43,25 @@ const SendTransactionForm: FC<{
           if (state.toAddress && amount) {
             setState(assoc('loading', true));
             setState(assoc('successMsg', ''));
-            const message = await onSubmit(state.toAddress, amount);
-            if (message) setState(assoc('errorMsg', message));
-            else {
+            try {
+              setState(assoc('infoMsg', 'This might take a while...'));
+              const message = await onSubmit(state.toAddress, amount);
+              if (message) setState(assoc('errorMsg', message));
+              else {
+                setState(
+                  assoc('successMsg', `You've successfully sent ${amount} ETH`),
+                );
+                setState(assoc('toAddress', ''));
+                setState(assoc('amount', ''));
+              }
+            } catch (error) {
+              console.error(error);
               setState(
-                assoc('successMsg', `You've successfully sent ${amount} ETH`),
+                assoc(
+                  'infoMsg',
+                  'Your transaction is being processed in the background. Please reload the page in a few minutes to see an update in your balance',
+                ),
               );
-              setState(assoc('toAddress', ''));
-              setState(assoc('amount', ''));
             }
             setState(assoc('loading', false));
           }
@@ -79,7 +91,7 @@ const SendTransactionForm: FC<{
         />
       </SimpleForm>
       {state.loading && !state.successMsg && !state.errorMsg && (
-        <InfoMsg>This might take a while...</InfoMsg>
+        <InfoMsg>{state.infoMsg}</InfoMsg>
       )}
       {!state.loading && state.successMsg && !state.errorMsg && (
         <SuccessMsg>{state.successMsg}</SuccessMsg>
