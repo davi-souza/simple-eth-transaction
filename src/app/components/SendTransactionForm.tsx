@@ -75,7 +75,7 @@ const SendTransactionForm: FC<{
         <input
           type="submit"
           value={state.loading ? 'Sending...' : 'Send'}
-          disabled={state.loading || !state.toAddress || !amount || (amount < 0)}
+          disabled={state.loading || !state.toAddress || !amount || amount < 0}
         />
       </SimpleForm>
       {state.loading && !state.successMsg && !state.errorMsg && (

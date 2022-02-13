@@ -32,7 +32,7 @@ export const CenteredDiv = styled.div`
   justify-content: center;
   align-items: center;
   &.colored {
-    background-color: ${props => props.theme.main};
+    background-color: ${(props) => props.theme.main};
     color: #fff;
     font-size: 1.5rem;
     font-weight: bold;

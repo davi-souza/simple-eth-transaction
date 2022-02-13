@@ -36,7 +36,7 @@ const Home: NextPage = () => {
       }
       return '';
     },
-    [loading, jwt],
+    [loading, jwt, signOut, updateUser],
   );
 
   return (

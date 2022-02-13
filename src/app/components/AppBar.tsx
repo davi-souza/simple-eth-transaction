@@ -35,7 +35,9 @@ const AppBar: FC<{
                 : renderCurrency(user.balance * value) + ' USD'}{' '}
             </span>
           </UserBalance>
-          <LogoutButton id="appbar-logout" onClick={onSignOut}>Log Out</LogoutButton>
+          <LogoutButton id="appbar-logout" onClick={onSignOut}>
+            Log Out
+          </LogoutButton>
         </UserDiv>
       )}
     </Container>

@@ -74,7 +74,7 @@ const SignInPage: NextPage = () => {
             />
           </SimpleForm>
           <Link href="/signup">
-            <a>Don't have an account? Click here to sign up</a>
+            <a>{"Don't have an account? Click here to sign up"}</a>
           </Link>
           {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
         </div>

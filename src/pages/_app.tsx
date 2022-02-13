@@ -24,7 +24,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [setState]);
 
   useEffect(() => {
-    if (!state.jwt.loading && state.jwt.value === null && !['/signin', '/signup'].includes(route)) {
+    if (
+      !state.jwt.loading &&
+      state.jwt.value === null &&
+      !['/signin', '/signup'].includes(route)
+    ) {
       replace('/signin');
     }
   }, [state.jwt.loading, state.jwt.value, route, replace]);

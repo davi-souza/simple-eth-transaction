@@ -21,7 +21,10 @@ const usersApi = routeHandler({
     );
   },
   get: privateRouteHandler(async (req, res) => {
-    const x = await eth.getPastLogs({fromBlock: '0x0', address: req.user.address});
+    const x = await eth.getPastLogs({
+      fromBlock: '0x0',
+      address: req.user.address,
+    });
     console.log(x);
     return res
       .status(200)
