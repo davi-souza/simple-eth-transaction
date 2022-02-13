@@ -90,7 +90,7 @@ const SendTransactionForm: FC<{
           disabled={state.loading || !state.toAddress || !amount || amount < 0}
         />
       </SimpleForm>
-      {state.loading && !state.successMsg && !state.errorMsg && (
+      {!state.successMsg && !state.errorMsg && state.infoMsg && (
         <InfoMsg>{state.infoMsg}</InfoMsg>
       )}
       {!state.loading && state.successMsg && !state.errorMsg && (
